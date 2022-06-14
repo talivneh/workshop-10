@@ -1,59 +1,63 @@
-# Exercise 5 - Sequelize ORM
+# Sequelize ORM workshop
 
-It is not persisted until you persist it!
+In this workshop we will add Sequelize ORM to a simple node app.
 
-## In this section you will practice
+## You will practice
 
 **Initializing Sequelize ORM** - Connect NodeJS application to your mysql DB using Sequelize ORM 
 
-**Sequelize models** - Use Sequelize models to execute queries on your DB
+**Sequelize models** - Use Sequelize model to execute queries on your DB
 
 **Migrations and seeds** - Manage DB changes using Sequelize migrations
 
-## What you are going to build
 
-In the last exercise, you've added an ExpressJS server to your todo app, which allowed you to reload your todos from server. 
+## Workshop steps:
+1. Clone this repository: `git clone git@github.com:monday-u-com/workshop-10.git`
+2. CD workshop-10 directory
+3. Explore `server/db` folder files - config (where we set connection details to our db), migrations (migration files will be added here), models (model definition of player entity)
+4. Run `npm install`
+5. Run `npm start`
+6. Open browser and go to "http://localhost:3042/players" - this will load all players from our db
 
-But what happens when you restart your server?! you guessed right, all todos disappeared :( 
+### Task #1
+Implement `getPlayer` function in `storage_service.js`. Use the Player model to find the specific player and return it. 
+Verify it works: http://localhost:3042/player/1
 
-In this exercise we will add a DB to our application that will hold all items' data. This will provide us a real persistent storage that would keep our data even if our server is down. 
+### Task #2
+Implement `createPlayer` function in `storage_service.js`. Use the Player model to create a new player in our DB.
+Verify it works, insert new player `curl -X POST localhost:3042/player   -H 'Content-Type: application/json'   -d '{ "player_id":9999,"player_name":"player name","age":30,"position":"Attacker","country":"uk"}'` and load it's data: http://localhost:3042/player/9999
 
-You can use your ex4 solution or use the boilerplate in this folder. 
+### Task #3
+Using [`npx sequelize-cli model:generate`](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration) - create a new model for Salary (run the following from db folder) -  `npx sequelize-cli model:generate --name Salary --attributes start_date:date,end_date:date,amount:integer,player_id:integer`. 
+
+Explore the new files that were generated in migrations and model folder. 
+
+Execute migration: `npx sequelize-cli db:migrate` this will create the Saralies table in our DB. 
+
+Insert a row to Salary table: ```INSERT INTO `mysql_workshop`.`Salaries` (`id`, `start_date`, `end_date`, `amount`, `player_id`) VALUES ('1', '2022-01-02', '2023-01-01', '1000', '9999', '2022-01-02', '2022-01-02')```
+
+Implement the getSalary function, then go to browser and get the salary data via API: http://localhost:3042/salary/1
+
+
+### Task #4
+Add [association](https://sequelize.org/docs/v6/core-concepts/assocs/#:~:text=To%20do%20this%2C%20Sequelize%20provides,The%20HasMany%20association) between Salary's player_id field and Player model.
+
+Include the Player model in getSalary response (using the `include` option- `findByPk(id, { include: <model name>})`) 
+
+Go to browser and get the salary data via API: http://localhost:3042/salary/1 , now it should include the player data as well!
+
 
 ### Prerequisites:
 Following pre-requisites were covered in our last workshop. 
 - Download and install [docker](https://docs.docker.com/get-docker/)
 - Open console and pull latest mysql image: ```docker pull mysql/mysql-server ```
-- Run mysql container and initialize it with the proper user, password, db name and permissions: ```docker run -p 3306:3306 --name tododb -e MYSQL_ROOT_PASSWORD=password -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=todo_db -d mysql/mysql-server```
+- Run mysql container and initialize it with the proper user, password, db name and permissions: ```docker run -p 3306:3306 --name mysql_workshop -e MYSQL_ROOT_PASSWORD=password -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=mysql_workshop -d mysql/mysql-server```
 - Validate container is up: ```docker ps``` 
 
-### The requirements:
 
-- [ ] Install Sequelize and mysql driver. [Sequelize- Getting Started](https://sequelize.org/docs/v6/getting-started/)
-- [ ] Install Sequelize CLI. [Installing the CLI](https://sequelize.org/docs/v6/other-topics/migrations/)
-- [ ] Initialize Sequelize using `sequelize-cli init` inside 'src/server/db' folder 
-- [ ] Create Items table using Sequelize migration - a new table with id and ItemName fields
-- [ ] Modify `storage_service.js`: remove items array and modify all item operations to use Item model
-- [ ] Create and run a separate migration for adding a `status` column (BOOLEAN) to Items table in your DB
-- [ ] Add checkbox to each item in UI to indicate its status (Done vs not)
-- [ ] Modify client and server code to support persistence of the new Item status 
-
-Your todo app should have now an additional checkbox that marks the status of the item. Every change to the checkbox should be stored in our Items table under the status column (true or false)
-
-Now, even if your server is down - all your items are stored. Once the server is up again - you should be able to see all items.
-
-Here is an example how it can look on the client side:
-![](../assets/hw-5.gif)
-
-### Bonus
-
-- [ ] Add "Done" timestamp
-- [ ] Add index to the Items table (which columns compose the index?) 
-- [ ] Add server validation - create a new item only if not exists (Use transaction)
-- [ ] Add edit capabilities to an item. 
-
-## Submitting your exercise
-
-After you finish each exercise, you can upload your solution to this board (You can see only your assignments on this board):  
-[https://monday-u.monday.com/boards/12343545](https://monday-u.monday.com/boards/12343545)  
-You can upload your solution multiple times if you would like to fix anything, no worries :)
+## Usefull links:
+[Initializing Sequelize](https://sequelize.org/docs/v6/getting-started/)
+[Creating migrations](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration)
+[DataTypes](https://sequelize.org/docs/v6/core-concepts/model-basics/#data-types)
+[Association](https://sequelize.org/docs/v6/core-concepts/assocs/#:~:text=To%20do%20this%2C%20Sequelize%20provides,The%20HasMany%20association)
+[Sequelize documentation](https://sequelize.org/docs/v6/)

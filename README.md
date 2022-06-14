@@ -4,8 +4,6 @@ In this workshop we will add Sequelize ORM to a simple node app.
 
 ## You will practice
 
-**Initializing Sequelize ORM** - Connect NodeJS application to your mysql DB using Sequelize ORM 
-
 **Sequelize models** - Use Sequelize model to execute queries on your DB
 
 **Migrations and seeds** - Manage DB changes using Sequelize migrations

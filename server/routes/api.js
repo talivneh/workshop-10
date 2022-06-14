@@ -12,10 +12,16 @@ router.get('/player/:player_id', async (req, res) => {
   res.send(await storage.getPlayer(req.params.player_id));
 });
 
-// curl -X POST localhost:3042/player   -H 'Content-Type: application/json'   -d '{ "player_id":99,"player_name":"player name","age":30,"position":"Attacker","country":"fr"}'
+// curl -X POST localhost:3042/player   -H 'Content-Type: application/json'   -d '{ "player_id":9999,"player_name":"player name","age":30,"position":"Attacker","country":"fr"}'
 router.post('/player', async (req, res) => {
   await storage.createPlayer(req.body);
   res.end();
 });
+
+// curl localhost:3042/salary/1
+router.get('/salary/:salary_id', async (req, res) => {
+  res.send(await storage.getSalary(req.params.salary_id));
+});
+
 
 module.exports = router;

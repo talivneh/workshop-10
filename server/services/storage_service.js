@@ -12,6 +12,11 @@ class StorageService {
   createPlayer = async player => {
     //TODO 2: Use Player sequelize model to create a player
   };
+
+  getSalary = async (salary_id) => {
+    return "TODO";
+    //TODO 3: Use Salary sequelize model after migration
+  };
 }
 
 module.exports = new StorageService();

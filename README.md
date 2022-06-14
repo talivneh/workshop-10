@@ -1,43 +1,59 @@
-### ORM WORKSHOP
+# Exercise 5 - Sequelize ORM
 
-## Workshop prerequisites installations
+It is not persisted until you persist it!
 
-1. [Download and install docker](https://docs.docker.com/get-docker/)
-   1. Verify installation: run "docker ps" in console. 
-2. [Download and install mysql workbench](https://dev.mysql.com/downloads/workbench/)
-   1. After pressing download you'll be asked to login or register, just skip it using the "No thanks, just start my download." click (see pic)
-   <img src="https://github.com/monday-u-com/workshop-9/blob/main/pics/workpic.jpeg" width="600" height="500">
-3. 
+## In this section you will practice
 
+**Initializing Sequelize ORM** - Connect NodeJS application to your mysql DB using Sequelize ORM 
 
-### Workshop DB setup
-Execute the following command to run the container with new DB:
+**Sequelize models** - Use Sequelize models to execute queries on your DB
 
-docker run --name mysql_workshop -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_ROOT_HOST=%  -e MYSQL_DATABASE=mysql_workshop -d mysql/mysql-server
+**Migrations and seeds** - Manage DB changes using Sequelize migrations
 
-This will create a docker container running a mysql db named "mysql_workshop".
+## What you are going to build
 
-Let's connect to the DB using mysql workbench.
+In the last exercise, you've added an ExpressJS server to your todo app, which allowed you to reload your todos from server. 
 
-Create new connection in mysql workbench, configure and test your connection:
-   <img src="https://github.com/monday-u-com/workshop-9/blob/main/pics/connectpic.png" width="800" height="450">
+But what happens when you restart your server?! you guessed right, all todos disappeared :( 
 
-Now You should be able to see the mysql_workshop DB and run queries on it. 
+In this exercise we will add a DB to our application that will hold all items' data. This will provide us a real persistent storage that would keep our data even if our server is down. 
 
-Download [workshop_create_table.sql](https://github.com/monday-u-com/workshop-9/blob/main/workshop_create_table.sql) and execute it in workbench. This will create the tables for our Football DB.
+You can use your ex4 solution or use the boilerplate in this folder. 
 
-Download [workshop_instert_data.sql](https://github.com/monday-u-com/workshop-9/blob/main/workshop_instert_data.sql) and execute it in workbench. This will insert data to the tables in our DB.
+### Prerequisites:
+Following pre-requisites were covered in our last workshop. 
+- Download and install [docker](https://docs.docker.com/get-docker/)
+- Open console and pull latest mysql image: ```docker pull mysql/mysql-server ```
+- Run mysql container and initialize it with the proper user, password, db name and permissions: ```docker run -p 3306:3306 --name tododb -e MYSQL_ROOT_PASSWORD=password -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=todo_db -d mysql/mysql-server```
+- Validate container is up: ```docker ps``` 
 
-### Workshop exercises
+### The requirements:
 
-Write SQL queries:
+- [ ] Install Sequelize and mysql driver. [Sequelize- Getting Started](https://sequelize.org/docs/v6/getting-started/)
+- [ ] Install Sequelize CLI. [Installing the CLI](https://sequelize.org/docs/v6/other-topics/migrations/)
+- [ ] Initialize Sequelize using `sequelize-cli init` inside 'src/server/db' folder 
+- [ ] Create Items table using Sequelize migration - a new table with id and ItemName fields
+- [ ] Modify `storage_service.js`: remove items array and modify all item operations to use Item model
+- [ ] Create and run a separate migration for adding a `status` column (BOOLEAN) to Items table in your DB
+- [ ] Add checkbox to each item in UI to indicate its status (Done vs not)
+- [ ] Modify client and server code to support persistence of the new Item status 
 
-1. How many players from Serbia exists in our DB?
-2. Which country has the most players in our DB?
-3. Name all players who assist a goal in match 41 (without a join)
-4. Name all players who assist a goal in match 41 (using join)
-5. Name all players who are attackers and didn’t score any goal (using left join)
-6. Use explain to get information about the last query (screenshot your results)
-7. Add index to players table on position column
-8. Run explain again - what are the differences? meanings?
-9. Using transaction, write a query to get the youngest manager and move him to a new club 
+Your todo app should have now an additional checkbox that marks the status of the item. Every change to the checkbox should be stored in our Items table under the status column (true or false)
+
+Now, even if your server is down - all your items are stored. Once the server is up again - you should be able to see all items.
+
+Here is an example how it can look on the client side:
+![](../assets/hw-5.gif)
+
+### Bonus
+
+- [ ] Add "Done" timestamp
+- [ ] Add index to the Items table (which columns compose the index?) 
+- [ ] Add server validation - create a new item only if not exists (Use transaction)
+- [ ] Add edit capabilities to an item. 
+
+## Submitting your exercise
+
+After you finish each exercise, you can upload your solution to this board (You can see only your assignments on this board):  
+[https://monday-u.monday.com/boards/12343545](https://monday-u.monday.com/boards/12343545)  
+You can upload your solution multiple times if you would like to fix anything, no worries :)

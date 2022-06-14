@@ -57,7 +57,11 @@ Following pre-requisites were covered in our last workshop.
 
 ## Usefull links:
 [Initializing Sequelize](https://sequelize.org/docs/v6/getting-started/)
+
 [Creating migrations](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration)
+
 [DataTypes](https://sequelize.org/docs/v6/core-concepts/model-basics/#data-types)
+
 [Association](https://sequelize.org/docs/v6/core-concepts/assocs/#:~:text=To%20do%20this%2C%20Sequelize%20provides,The%20HasMany%20association)
+
 [Sequelize documentation](https://sequelize.org/docs/v6/)

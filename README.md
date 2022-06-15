@@ -9,6 +9,15 @@ In this workshop we will add Sequelize ORM to a simple node app.
 **Migrations** - Manage DB changes using Sequelize migrations
 
 
+### Prerequisites - complete [workshop #9](https://github.com/monday-u-com/workshop-9)
+Following pre-requisites were covered in our last workshop. 
+- Download and install [docker](https://docs.docker.com/get-docker/)
+- Open console and pull latest mysql image: ```docker pull mysql/mysql-server ```
+- Run mysql container: ```docker run -p 3306:3306 --name mysql_workshop -e MYSQL_ROOT_PASSWORD=password -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=mysql_workshop -d mysql/mysql-server```
+- Validate container is up: ```docker ps``` 
+- Download [workshop_create_table.sql](https://github.com/monday-u-com/workshop-9/blob/main/workshop_create_table.sql) and execute it in workbench. This will create the tables for our Football DB.
+- Download [workshop_instert_data.sql](https://github.com/monday-u-com/workshop-9/blob/main/workshop_instert_data.sql) and execute it in workbench. This will insert data to the tables in our DB.
+
 ## Workshop steps:
 1. Clone this repository: `git clone git@github.com:monday-u-com/workshop-10.git`
 2. CD workshop-10 directory

@@ -12,7 +12,7 @@ In this workshop we will add Sequelize ORM to a simple node app.
 ## Workshop steps:
 1. Clone this repository: `git clone git@github.com:monday-u-com/workshop-10.git`
 2. CD workshop-10 directory
-3. Explore `server/db` folder files - config (where we set connection details to our db), migrations (migration files will be added here), models (model definition of player entity)
+3. Explore `server/db` folder files - config (where we set connection details to our db) and models (model definition of player entity)
 4. Run `npm install`
 5. Run `npm start`
 6. Open browser and go to "http://localhost:3042/players" - this will load all players from our db
@@ -26,7 +26,7 @@ Implement `createPlayer` function in `storage_service.js`. Use the Player model 
 Verify it works, insert new player using Postman or the command: `curl -X POST localhost:3042/player   -H 'Content-Type: application/json'   -d '{ "player_id":9999,"player_name":"player name","age":30,"position":"Attacker","country":"uk"}'` and load it's data: http://localhost:3042/player/9999
 
 ### Task #3
-Using [`npx sequelize-cli model:generate`](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration) - create a new model for Salary (run the following from db folder) -  `npx sequelize-cli model:generate --name Salary --attributes start_date:date,end_date:date,amount:integer,player_id:integer`. 
+Using [`npx sequelize-cli model:generate`](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration) - create a new model for Salary (run the following from db folder) -  `npx sequelize-cli model:generate --name Salary --attributes start_date:date,end_date:date,amount:integer,player_id:integer`. This will create a migration file in `server/db/migrations`.
 
 Explore the new files that were generated in migrations and model folder. 
 

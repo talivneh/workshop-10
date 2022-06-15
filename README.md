@@ -6,7 +6,7 @@ In this workshop we will add Sequelize ORM to a simple node app.
 
 **Sequelize models** - Use Sequelize model to execute queries on your DB
 
-**Migrations and seeds** - Manage DB changes using Sequelize migrations
+**Migrations** - Manage DB changes using Sequelize migrations
 
 
 ## Workshop steps:
@@ -23,14 +23,14 @@ Verify it works: http://localhost:3042/player/1
 
 ### Task #2
 Implement `createPlayer` function in `storage_service.js`. Use the Player model to create a new player in our DB.
-Verify it works, insert new player `curl -X POST localhost:3042/player   -H 'Content-Type: application/json'   -d '{ "player_id":9999,"player_name":"player name","age":30,"position":"Attacker","country":"uk"}'` and load it's data: http://localhost:3042/player/9999
+Verify it works, insert new player using Postman or the command: `curl -X POST localhost:3042/player   -H 'Content-Type: application/json'   -d '{ "player_id":9999,"player_name":"player name","age":30,"position":"Attacker","country":"uk"}'` and load it's data: http://localhost:3042/player/9999
 
 ### Task #3
 Using [`npx sequelize-cli model:generate`](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration) - create a new model for Salary (run the following from db folder) -  `npx sequelize-cli model:generate --name Salary --attributes start_date:date,end_date:date,amount:integer,player_id:integer`. 
 
 Explore the new files that were generated in migrations and model folder. 
 
-Execute migration: `npx sequelize-cli db:migrate` this will create the Saralies table in our DB. 
+Now execute the migration: `npx sequelize-cli db:migrate`  - this will create the Saralies table in our DB. 
 
 Insert a row to Salary table: ```INSERT INTO `mysql_workshop`.`Salaries` (`id`, `start_date`, `end_date`, `amount`, `player_id`) VALUES ('1', '2022-01-02', '2023-01-01', '1000', '9999', '2022-01-02', '2022-01-02')```
 
@@ -40,7 +40,7 @@ Implement the getSalary function, then go to browser and get the salary data via
 ### Task #4
 Add [association](https://sequelize.org/docs/v6/core-concepts/assocs/#:~:text=To%20do%20this%2C%20Sequelize%20provides,The%20HasMany%20association) between Salary's player_id field and Player model.
 
-Include the Player model in getSalary response (using the `include` option- `findByPk(id, { include: <model name>})`) 
+Include the Player model in getSalary response (use the `include` option `findByPk(id, { include: <model name>})`) 
 
 Go to browser and get the salary data via API: http://localhost:3042/salary/1 , now it should include the player data as well!
 

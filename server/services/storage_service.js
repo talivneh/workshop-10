@@ -17,7 +17,7 @@ class StorageService {
   };
 
   getSalary = async (salary_id) => {
-    return await Salary.findByPk(salary_id, {include: Player});
+    return await Salary.findByPk(salary_id);
   };
 
 }

@@ -9,10 +9,19 @@ In this workshop we will add Sequelize ORM to a simple node app.
 **Migrations** - Manage DB changes using Sequelize migrations
 
 
+### Prerequisites - complete [workshop #9](https://github.com/monday-u-com/workshop-9), have a football DB in your machine
+- Download and install [docker](https://docs.docker.com/get-docker/)
+- Open console and pull latest mysql image: ```docker pull mysql/mysql-server ```
+- Run mysql container: ```docker run -p 3306:3306 --name mysql_workshop -e MYSQL_ROOT_PASSWORD=password -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=mysql_workshop -d mysql/mysql-server```
+- Validate container is up: ```docker ps``` 
+- !!! Alternatively to docker - install SQL sever without docker: https://dev.mysql.com/downloads/mysql/
+- Download [workshop_create_table.sql](https://github.com/monday-u-com/workshop-9/blob/main/workshop_create_table.sql) and execute it in workbench. This will create the tables for our Football DB.
+- Download [workshop_instert_data.sql](https://github.com/monday-u-com/workshop-9/blob/main/workshop_instert_data.sql) and execute it in workbench. This will insert data to the tables in our DB.
+
 ## Workshop steps:
 1. Clone this repository: `git clone git@github.com:monday-u-com/workshop-10.git`
 2. CD workshop-10 directory
-3. Explore `server/db` folder files - config (where we set connection details to our db), migrations (migration files will be added here), models (model definition of player entity)
+3. Explore `server/db` folder files - config (where we set connection details to our db) and models (model definition of player entity)
 4. Run `npm install`
 5. Run `npm start`
 6. Open browser and go to "http://localhost:3042/players" - this will load all players from our db
@@ -26,7 +35,7 @@ Implement `createPlayer` function in `storage_service.js`. Use the Player model 
 Verify it works, insert new player using Postman or the command: `curl -X POST localhost:3042/player   -H 'Content-Type: application/json'   -d '{ "player_id":9999,"player_name":"player name","age":30,"position":"Attacker","country":"uk"}'` and load it's data: http://localhost:3042/player/9999
 
 ### Task #3
-Using [`npx sequelize-cli model:generate`](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration) - create a new model for Salary (run the following from db folder) -  `npx sequelize-cli model:generate --name Salary --attributes start_date:date,end_date:date,amount:integer,player_id:integer`. 
+Using [`npx sequelize-cli model:generate`](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration) - create a new model for Salary (run the following from db folder) -  `npx sequelize-cli model:generate --name Salary --attributes start_date:date,end_date:date,amount:integer,player_id:integer`. This will create a migration file in `server/db/migrations`.
 
 Explore the new files that were generated in migrations and model folder. 
 
@@ -44,13 +53,6 @@ Include the Player model in getSalary response (use the `include` option `findBy
 
 Go to browser and get the salary data via API: http://localhost:3042/salary/1 , now it should include the player data as well!
 
-
-### Prerequisites:
-Following pre-requisites were covered in our last workshop. 
-- Download and install [docker](https://docs.docker.com/get-docker/)
-- Open console and pull latest mysql image: ```docker pull mysql/mysql-server ```
-- Run mysql container and initialize it with the proper user, password, db name and permissions: ```docker run -p 3306:3306 --name mysql_workshop -e MYSQL_ROOT_PASSWORD=password -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=mysql_workshop -d mysql/mysql-server```
-- Validate container is up: ```docker ps``` 
 
 
 ## Usefull links:

@@ -1,6 +1,6 @@
 # Sequelize ORM workshop
 
-In this workshop we will add Sequelize ORM to a simple node app.
+In this workshop we use Sequelize ORM in a simple node app.
 
 ## You will practice
 

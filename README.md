@@ -30,13 +30,13 @@ In this workshop we will add Sequelize ORM to a simple node app.
 Implement `getPlayer` function in `storage_service.js`. Use the Player model to find the specific player and return it. 
 Verify it works: http://localhost:3042/player/1
 
-Solution: https://github.com/monday-u-com/workshop-10/pull/4
+[Solution](https://github.com/monday-u-com/workshop-10/pull/4)
 
 ### Task #2
 Implement `createPlayer` function in `storage_service.js`. Use the Player model to create a new player in our DB.
 Verify it works, insert new player using Postman or the command: `curl -X POST localhost:3042/player   -H 'Content-Type: application/json'   -d '{ "player_id":9999,"player_name":"player name","age":30,"position":"Attacker","country":"uk"}'` and load it's data: http://localhost:3042/player/9999
 
-Solution: https://github.com/monday-u-com/workshop-10/pull/5
+[Solution](https://github.com/monday-u-com/workshop-10/pull/5)
 
 
 ### Task #3
@@ -46,20 +46,20 @@ Explore the new files that were generated in migrations and model folder.
 
 Now execute the migration: `npx sequelize-cli db:migrate`  - this will create the Saralies table in our DB. 
 
-Solution: https://github.com/monday-u-com/workshop-10/pull/6
+[Solution](https://github.com/monday-u-com/workshop-10/pull/6)
 
 
 ### Task #4
 Implement `createSalary` function in `storage_service.js`. Use the Salary model to create a new salary in our DB.
 Verify it works, insert new Salary using Postman or the command: `curl -X POST localhost:3042/salary   -H 'Content-Type: application/json'   -d '{ "start_date":"2022-01-02","end_date":"2023-01-01","amount":100000,"player_id":1}'` 
 
-Solution: https://github.com/monday-u-com/workshop-10/pull/2
+[Solution](https://github.com/monday-u-com/workshop-10/pull/2)
 
 
 ### Task #5
 Implement the getSalary function, then go to browser and get the salary data via API: http://localhost:3042/salary/1
 
-Solution: https://github.com/monday-u-com/workshop-10/pull/3
+[Solution](https://github.com/monday-u-com/workshop-10/pull/3)
 
 
 ### Task #6
@@ -69,7 +69,7 @@ Include the Player model in getSalary response (use the `include` option `findBy
 
 Go to browser and get the salary data via API: http://localhost:3042/salary/1 , now it should include the player data as well!
 
-Solution: https://github.com/monday-u-com/workshop-10/pull/1
+[Solution](https://github.com/monday-u-com/workshop-10/pull/1)
 
 
 

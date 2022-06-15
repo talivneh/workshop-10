@@ -12,10 +12,16 @@ class StorageService {
     await Player.create({"player_id":player.player_id, "player_name":player.player_name,"age":player.age,"position":player.position,"country":player.country});
   };
 
+  createSalary = async salary => {
+    //TODO 4: Use Salary sequelize model to create a salary
+  };
+
   getSalary = async (salary_id) => {
     return "TODO";
-    //TODO 3: Use Salary sequelize model after migration
+    //TODO 5: Use Salary sequelize model to get salary
   };
+
+
 }
 
 module.exports = new StorageService();

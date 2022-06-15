@@ -23,5 +23,12 @@ router.get('/salary/:salary_id', async (req, res) => {
   res.send(await storage.getSalary(req.params.salary_id));
 });
 
+// curl -X POST localhost:3042/salary   -H 'Content-Type: application/json'   -d '{ "start_date":"2022-01-02","end_date":"2023-01-01","amount":100000,"player_id":1}'
+router.post('/salary', async (req, res) => {
+  await storage.createSalary(req.body);
+  res.end();
+});
+
+
 
 module.exports = router;

@@ -6,7 +6,6 @@ class StorageService {
 
   getPlayer = async (player_id) => {
     return Player.findByPk(player_id);
-    //TODO 1: Use Player sequelize model to retrieve the specific player
   };
 
   createPlayer = async player => {

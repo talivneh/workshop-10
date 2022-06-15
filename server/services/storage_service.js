@@ -17,8 +17,7 @@ class StorageService {
   };
 
   getSalary = async (salary_id) => {
-    return "TODO";
-    //TODO 5: Use Salary sequelize model to get salary
+    return Player.findByPk(salary_id);
   };
 
 

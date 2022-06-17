@@ -30,6 +30,13 @@ router.post('/salary', async (req, res) => {
   res.end();
 });
 
-
+router.use((error, req, res, next) => {
+  console.log("Error handled");
+  console.log(error.stack);
+  console.log(error.message);
+  return res.status(error.statusCode || 500).json({
+    message: error.message || "Something went wrong"
+  });
+});
 
 module.exports = router;
